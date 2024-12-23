@@ -2,7 +2,6 @@ package reshimot;
 
 
 public class exe {
-
 	public static Node<Integer> del2(Node<Integer> L1) {
 	    Node<Integer> head = L1;
 	    Node<Integer> current1 = L1;
@@ -28,26 +27,32 @@ public class exe {
 
 	}
 	
-	
 
 	public static Node<Integer> delEven(Node<Integer> H) {
-		Node<Integer> current = H;
-		Node<Integer> newH = new Node<>(null);
-		Node<Integer> newCurrent = newH;
-		while (current.getNext().getNext()!=null) {
-			newCurrent.setNext(current.getNext());
-			newCurrent = current.getNext();
-			current.setNext(current.getNext().getNext());
-			current = current.getNext();
-		}
-		newCurrent.setNext(current.getNext());
-		current.setNext(current.getNext().getNext());
-		return newH.getNext();
+	    if (H == null || H.getNext() == null) {
+	        return H;
+	    }
+
+	    Node<Integer> current = H;
+	    Node<Integer> newH = new Node<>(-1);
+	    Node<Integer> newCurrent = newH;
+
+	    int index = 0;
+	    while (current != null) {
+	        if (index % 2 != 0) {
+	            newCurrent.setNext(current);
+	            newCurrent = newCurrent.getNext();
+	        }
+	        current = current.getNext();
+	        index++;
+	    }
+
+	    newCurrent.setNext(null);
+	    return newH.getNext();
 	}
 
 
 	public static void main(String[] args) {
-		int [] arr= {1,2,3,4,3,6,5};
 	    Node<Integer> L1 = new Node<>(1); 
 	    Node<Integer> second = new Node<>(2);
 	    Node<Integer> third = new Node<>(3);
@@ -57,7 +62,7 @@ public class exe {
 	    second.setNext(third);
 	    third.setNext(fourth);
 	    fourth.setNext(fifth);
-	    
+	    System.out.println(delEven((L1)));
 	   System.out.println(del2(L1));
 	
 	
